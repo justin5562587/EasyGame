@@ -3,33 +3,17 @@
 
 int main() {
 
-    // create main window
-    sf::Window window(sf::VideoMode(800, 600), "My Window");
+    sf::Window window(sf::VideoMode(500, 500), "My Window");
 
-    // load a sprite to display
-//    sf::Texture texture;
-//    if (!texture.loadFromFile("./sfml_test.jpeg")) {
-//        return EXIT_FAILURE;
-//    }
-//    sf::Sprite sprite(texture);
-
-    sf::Text text("Hello SFML");
-
-    while (window.isOpen()) {
-        // process event
+    while(window.isOpen()) {
         sf::Event event;
-        while (window.pollEvent(event)) {
-
-            // close window exit
-            if (event.type == sf::Event::Closed) {
+        while (window.pollEvent(event))
+        {
+            // "close requested" event: we close the window
+            if (event.type == sf::Event::Closed)
                 window.close();
-            }
         }
-
-        window.display();
     }
-
-    return EXIT_SUCCESS;
 
     return 0;
 }
