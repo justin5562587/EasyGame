@@ -7,23 +7,30 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-class Player {
+class Player : public sf::Drawable {
 
 public:
 
-    Player(const Player&) = delete;
+    Player(const Player &) = delete;
 
-    Player& operator=(const Player&) = delete;
+    Player &operator=(const Player &) = delete;
 
     Player();
 
-    const sf::VertexArray& getTriangle();
-
 private:
 
-    void setTriangle();
+    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const {
+        // apply the texture
+        states.texture = &m_texture;
 
-    sf::VertexArray triangle;
+        // you may also override states.shader or states.blendMode if you want
+
+        // draw the vertex array
+        target.draw(m_vertices, states);
+    }
+
+    sf::VertexArray m_vertices;
+    sf::Texture m_texture;
 
 };
 
