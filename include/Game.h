@@ -6,7 +6,7 @@
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-//#include "./Player.h"
+#include "./Player.h"
 
 class Game {
 
@@ -29,7 +29,7 @@ private:
 
     sf::RenderWindow _window;
 
-    sf::CircleShape _player;
+    Player _player;
 
 };
 

@@ -8,7 +8,7 @@ set(SRC_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 set(FILES_SRC
         ${SRC_ROOT}/Game.cpp
-#        ${SRC_ROOT}/Player.cpp
+        ${SRC_ROOT}/Player.cpp
         ${SRC_ROOT}/main.cpp
         )
 

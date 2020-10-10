@@ -3,7 +3,7 @@
 //
 #include "../include/Game.h"
 
-Game::Game() : _window(sf::VideoMode(1000, 1000), "02_Game_Archi"), _player(150) {
+Game::Game() : _window(sf::VideoMode(1000, 1000), "Test SFML"), _player() {
 
 }
 
@@ -29,24 +29,6 @@ void Game::processEvent() {
         if (event.type == sf::Event::Closed) {
             _window.close();
         }
-//        else if (event.type == sf::Event::KeyPressed) {
-//            if (event.key.code == sf::Keyboard::Escape) {
-//                _window.close();
-//            } else if (event.key.code == sf::Keyboard::Up) {
-//                _player.isMoving = true;
-//            } else if (event.key.code == sf::Keyboard::Left) {
-//                _player.rotation = -1;
-//            } else if (event.key.code == sf::Keyboard::Right) {
-//                _player.rotation = 1;
-//            }
-//        } else if (event.type == sf::Event::KeyReleased) {
-//            if(event.key.code == sf::Keyboard::Up)
-//                _player.isMoving = false;
-//            else if (event.key.code == sf::Keyboard::Left)
-//                _player.rotation = 0;
-//            else if (event.key.code == sf::Keyboard::Right)
-//                _player.rotation = 0;
-//        }
     }
 }
 
@@ -57,7 +39,7 @@ void Game::update(sf::Time deltaTime) {
 
 void Game::render() {
     _window.clear();
-    _window.draw(_player);
+    _window.draw(_player.getTriangle());
     _window.display();
 }
 

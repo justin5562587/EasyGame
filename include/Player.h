@@ -7,32 +7,23 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-class Player : public sf::Drawable {
+class Player {
 
 public:
 
-    Player(const Player &) = delete;
+    Player(const Player&) = delete;
 
-    Player &operator=(const Player &) = delete;
+    Player& operator=(const Player&) = delete;
 
     Player();
 
-    template<typename ... Args>
-    void setPosition(Args&& ... args) {
-        _shape.setPosition(std::forward<Args>(args)...);
-    }
-
-    void update(sf::Time deltaTime);
-    bool isMoving;
-    int rotation;
+    const sf::VertexArray& getTriangle();
 
 private:
 
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+    void setTriangle();
 
-    sf::RectangleShape _shape;
-
-    sf::Vector2f _velocity;
+    sf::VertexArray triangle;
 
 };
 
