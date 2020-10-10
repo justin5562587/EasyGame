@@ -3,12 +3,19 @@ project(EasyGame)
 
 set(CMAKE_CXX_STANDARD 11)
 
-#set(SFML_DIR "/Users/justin/cpp/SFML-2.5.1-macos-clang")
+set(INCLUDE_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/include)
+set(SRC_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+set(FILES_SRC
+        ${SRC_ROOT}/Game.cpp
+#        ${SRC_ROOT}/Player.cpp
+        ${SRC_ROOT}/main.cpp
+        )
+
 set(SFML_DIR "/Users/justin/cpp/SFML_BUILD")
 
-#set(SFML_STATIC_LIBRARIES TRUE)
 find_package(SFML REQUIRED COMPONENTS graphics window system)
 
-add_executable(EasyGame main.cpp)
+add_executable(EasyGame ${FILES_SRC})
 
-target_link_libraries (EasyGame sfml-graphics sfml-window sfml-system)
+target_link_libraries(EasyGame sfml-graphics sfml-window sfml-system)
