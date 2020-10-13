@@ -2,68 +2,44 @@
 // Created by justin on 2020/10/10.
 //
 #include "../include/Game.h"
-#include "../include/TileMap.h"
-#include <stdexcept>
 
-Game::Game() : _window(sf::VideoMode(1000, 1000), "Test SFML"), _player() {
-
+Game::Game() : _window(sf::VideoMode(400, 500), "Test window"), _player(100) {
+    _player.setFillColor(sf::Color::Blue);
+    _player.setPosition(10, 20);
 }
 
-void Game::run(int minimum_frame_per_seconds) {
-    sf::Clock clock;
-    sf::Time timeSinceLastUpdate;
-    sf::Time TimePerFrame = sf::seconds(1.f / minimum_frame_per_seconds);
-
-    // define the level with an array of tile indices
-    const int level[] =
-            {
-                    0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                    0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0,
-                    1, 1, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3,
-                    0, 1, 0, 0, 2, 0, 3, 3, 3, 0, 1, 1, 1, 0, 0, 0,
-                    0, 1, 1, 0, 3, 3, 3, 0, 0, 0, 1, 1, 1, 2, 0, 0,
-                    0, 0, 1, 0, 3, 0, 2, 2, 0, 0, 1, 1, 1, 1, 2, 0,
-                    2, 0, 1, 0, 3, 0, 2, 2, 2, 0, 1, 1, 1, 1, 1, 1,
-                    0, 0, 1, 0, 3, 2, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1,
-            };
-
-    // create the tilemap from the level definition
-    TileMap map;
-    if (!map.load("tileset.png", sf::Vector2u(32, 32), level, 16, 8)) {
-        throw std::runtime_error("load tile picture error");
-    }
-
+void Game::run() {
     while (_window.isOpen()) {
-        processEvent();
-        timeSinceLastUpdate = clock.restart();
-        while (timeSinceLastUpdate > TimePerFrame) {
-            timeSinceLastUpdate -= TimePerFrame;
-            update(TimePerFrame);
-        }
-        update(timeSinceLastUpdate);
+        processEvents();
+        update();
         render();
     }
 }
 
-void Game::processEvent() {
+void Game::processEvents() {
     sf::Event event;
     while (_window.pollEvent(event)) {
-        if (event.type == sf::Event::Closed) {
-            _window.close();
+
+        switch (event.type) {
+            case sf::Event::Closed:
+                _window.close();
+                break;
+            case sf::Event::KeyPressed:
+                if (event.key.code == sf::Keyboard::Escape) {
+                    _window.close();
+                }
+                break;
+            default:
+                break;
         }
+
     }
 }
 
-void Game::update(sf::Time deltaTime) {
-
-
-}
+void Game::update() {}
 
 void Game::render() {
     _window.clear();
     _window.draw(_player);
     _window.display();
 }
-
-
-
