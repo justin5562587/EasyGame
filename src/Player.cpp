@@ -22,6 +22,13 @@ void Player::update(sf::Time deltaTime) {
     _shape.move(_velocity * seconds);
 }
 
+void Player::processEvents() {
+    isMoving = sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
+    rotation = 0;
+    rotation -= sf::Keyboard::isKeyPressed(sf::Keyboard::Left);
+    rotation += sf::Keyboard::isKeyPressed(sf::Keyboard::Right);
+}
+
 void Player::draw(sf::RenderTarget &target, sf::RenderStates &states) {
     target.draw(_shape, states);
 }

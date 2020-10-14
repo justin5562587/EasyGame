@@ -8,10 +8,19 @@ Game::Game() : _window(sf::VideoMode(400, 500), "Test window"), _player(100) {
     _player.setPosition(10, 20);
 }
 
-void Game::run() {
+void Game::run(int minimum_frame_per_second) {
+    sf::Clock clock;
+    sf::Time timeSinceLastUpdate;
+    sf::Time TimePerFrame = sf::seconds(1.f / minimum_frame_per_second);
+
     while (_window.isOpen()) {
         processEvents();
-        update();
+        timeSinceLastUpdate = clock.restart();
+        if (timeSinceLastUpdate > TimePerFrame) {
+            timeSinceLastUpdate -= TimePerFrame;
+            update(TimePerFrame);
+        }
+        update(timeSinceLastUpdate);
         render();
     }
 }
@@ -53,7 +62,9 @@ void Game::processEvents() {
     }
 }
 
-void Game::update() {}
+void Game::update(sf::Time deltaTime) {
+
+}
 
 void Game::render() {
     _window.clear();
