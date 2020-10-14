@@ -12,11 +12,11 @@ class Player : public sf::Drawable {
 
 public:
 
-    Player();
-
     Player(const Player &) = delete;
 
     Player &operator=(const Player &) = delete;
+
+    Player();
 
     template<typename ...Args>
     void setPosition(Args &&...args) {
