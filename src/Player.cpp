@@ -12,7 +12,8 @@ Player::Player() : _shape(sf::Vector2f(20, 30)) {
 void Player::update(sf::Time deltaTime) {
     float seconds = deltaTime.asSeconds();
     if (rotation != 0) {
-        float angle = (rotation > 0 ? 1 : -1) * 180 * seconds;
+//        float angle = (rotation > 0 ? 1 : -1) * 180 * seconds;
+        float angle = rotation * 180 * seconds;
         _shape.rotate(angle);
     }
     if (isMoving) {
@@ -29,7 +30,7 @@ void Player::processEvents() {
     rotation += sf::Keyboard::isKeyPressed(sf::Keyboard::Right);
 }
 
-void Player::draw(sf::RenderTarget &target, sf::RenderStates &states) {
+void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(_shape, states);
 }
 

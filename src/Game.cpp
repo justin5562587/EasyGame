@@ -3,8 +3,7 @@
 //
 #include "../include/Game.h"
 
-Game::Game() : _window(sf::VideoMode(400, 500), "Test window"), _player(100) {
-    _player.setFillColor(sf::Color::Blue);
+Game::Game() : _window(sf::VideoMode(400, 500), "Test window"), _player() {
     _player.setPosition(10, 20);
 }
 
@@ -29,37 +28,45 @@ void Game::processEvents() {
     sf::Event event;
     while (_window.pollEvent(event)) {
 
-        switch (event.type) {
-            case sf::Event::Closed:
+        if (event.type == sf::Event::Closed) {
+            _window.close();
+        } else if (event.type == sf::Event::KeyPressed) {
+            if (event.key.code == sf::Keyboard::Escape) {
                 _window.close();
-                break;
-            case sf::Event::KeyPressed:
-                if (event.key.code == sf::Keyboard::Escape) {
-                    _window.close();
-                } else if (event.key.code == sf::Keyboard::Up) {
-                    _player.isMoving = true;
-                } else if (event.key.code == sf::Keyboard::Down) {
-                    _player.isMoving = false;
-                } else if (event.key.code == sf::Keyboard::Left) {
-                    _player.rotation = -1;
-                } else if (event.key.code == sf::Keyboard::Right) {
-                    _player.rotation = 1;
-                }
-                break;
-            case sf::Event::KeyReleased:
-                if (event.key.code == sf::Keyboard::Up) {
-                    _player.isMoving = false;
-                } else if (event.key.code == sf::Keyboard::Left) {
-                    _player.rotation = -1;
-                } else if (event.key.code == sf::Keyboard::Right) {
-                    _player.rotation = 1;
-                }
-                break;
-            default:
-                break;
+            }
         }
+//        switch (event.type) {
+//            case sf::Event::Closed:
+//                _window.close();
+//                break;
+//            case sf::Event::KeyPressed:
+//                if (event.key.code == sf::Keyboard::Escape) {
+//                    _window.close();
+//                } else if (event.key.code == sf::Keyboard::Up) {
+//                    _player.isMoving = true;
+//                } else if (event.key.code == sf::Keyboard::Down) {
+//                    _player.isMoving = false;
+//                } else if (event.key.code == sf::Keyboard::Left) {
+//                    _player.rotation = -1;
+//                } else if (event.key.code == sf::Keyboard::Right) {
+//                    _player.rotation = 1;
+//                }
+//                break;
+//            case sf::Event::KeyReleased:
+//                if (event.key.code == sf::Keyboard::Up) {
+//                    _player.isMoving = false;
+//                } else if (event.key.code == sf::Keyboard::Left) {
+//                    _player.rotation = -1;
+//                } else if (event.key.code == sf::Keyboard::Right) {
+//                    _player.rotation = 1;
+//                }
+//                break;
+//            default:
+//                break;
+//        }
 
     }
+    _player.processEvents();
 }
 
 void Game::update(sf::Time deltaTime) {
