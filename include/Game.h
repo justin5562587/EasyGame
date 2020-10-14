@@ -6,6 +6,7 @@
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include "../include/Player.h"
 
 class Game {
 
@@ -16,7 +17,7 @@ public:
 
     Game();
 
-    void run();
+    void run(int minimum_frame_per_second);
 
 private:
     void processEvents();
@@ -27,7 +28,7 @@ private:
 
     sf::RenderWindow _window;
 
-    sf::CircleShape _player;
+    Player _player;
 
 };
 
