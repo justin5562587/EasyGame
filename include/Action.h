@@ -13,7 +13,7 @@ public:
     enum Type {
         RealTime = 1,
         Pressed = 1 << 1,
-        Released = 1 << 2;
+        Released = 1 << 2
     };
 
     Action(const Action &other);

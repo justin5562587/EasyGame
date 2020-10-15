@@ -5,10 +5,11 @@
 #ifndef EASYGAME_PLAYER_H
 #define EASYGAME_PLAYER_H
 
+#include "../include/ActionTarget.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-class Player : public sf::Drawable {
+class Player : public sf::Drawable, public ActionTarget {
 
 public:
 
@@ -33,8 +34,8 @@ private:
     sf::RectangleShape _shape;
     sf::Vector2f _velocity;
 
-    bool isMoving;
-    int rotation;
+    bool _isMoving;
+    int _rotation;
 
 };
 

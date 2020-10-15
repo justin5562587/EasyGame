@@ -57,6 +57,10 @@ bool Action::operator==(const sf::Event &event) const {
     return res;
 }
 
+bool Action::operator==(const Action &other) const {
+    return _type == other._type and other == _event;
+}
+
 // custom function test
 bool Action::test() const {
     bool res = false;
