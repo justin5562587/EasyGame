@@ -7,7 +7,6 @@
 
 #include <SFML/Graphics.hpp>
 #include <list>
-#include <>
 #include "../include/Action.h"
 
 class ActionTarget {
