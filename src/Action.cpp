@@ -57,5 +57,18 @@ bool Action::operator==(const sf::Event &event) const {
     return res;
 }
 
-//
+// custom function test
+bool Action::test() const {
+    bool res = false;
+    if (_event.type == sf::Event::EventType::KeyPressed) {
+        if (_type & Type::Pressed) {
+            res = sf::Keyboard::isKeyPressed(_event.key.code);
+        }
+    } else if (_event.type == sf::Event::EventType::MouseButtonPressed) {
+        if (_type & Type::Pressed) {
+            res = sf::Mouse::isButtonPressed(_event.mouseButton.button);
+        }
+    }
+    return res;
+}
 

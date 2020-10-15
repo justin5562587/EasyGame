@@ -35,36 +35,6 @@ void Game::processEvents() {
                 _window.close();
             }
         }
-//        switch (event.type) {
-//            case sf::Event::Closed:
-//                _window.close();
-//                break;
-//            case sf::Event::KeyPressed:
-//                if (event.key.code == sf::Keyboard::Escape) {
-//                    _window.close();
-//                } else if (event.key.code == sf::Keyboard::Up) {
-//                    _player.isMoving = true;
-//                } else if (event.key.code == sf::Keyboard::Down) {
-//                    _player.isMoving = false;
-//                } else if (event.key.code == sf::Keyboard::Left) {
-//                    _player.rotation = -1;
-//                } else if (event.key.code == sf::Keyboard::Right) {
-//                    _player.rotation = 1;
-//                }
-//                break;
-//            case sf::Event::KeyReleased:
-//                if (event.key.code == sf::Keyboard::Up) {
-//                    _player.isMoving = false;
-//                } else if (event.key.code == sf::Keyboard::Left) {
-//                    _player.rotation = -1;
-//                } else if (event.key.code == sf::Keyboard::Right) {
-//                    _player.rotation = 1;
-//                }
-//                break;
-//            default:
-//                break;
-//        }
-
     }
     _player.processEvents();
 }
