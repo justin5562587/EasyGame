@@ -7,14 +7,20 @@
 
 #include <SFML/Graphics.hpp>
 #include <list>
-#include "../include/Action.h"
+#include "./Action.h"
+#include "./ActionMap.h"
 
+template<typename T = int>
 class ActionTarget {
 public:
 
+    ActionTarget(const ActionTarget<T> &) = delete;
+
+    ActionTarget<T> &operator=(const ActionTarget<T> &) = delete;
+
     using FuncType = std::function<void(const sf::Event &)>;
 
-    ActionTarget();
+    ActionTarget(const ActionMap<T> &map);
 
     // for real time
     bool processEvent(const sf::Event &event) const;
@@ -22,16 +28,20 @@ public:
     // for non real time
     void processEvents() const;
 
-    void bind(const Action &action, const FuncType &callback);
+    void bind(const T &key, const FuncType &callback);
 
-    void unbind(const Action &action);
+    void unbind(const T &key);
 
 private:
 
-    std::list<std::pair<Action, FuncType> > _eventsRealTime;
+    std::list<std::pair<T, FuncType> > _eventsRealTime;
 
-    std::list<std::pair<Action, FuncType> > _eventsPoll;
+    std::list<std::pair<T, FuncType> > _eventsPoll;
+
+    const ActionMap<T> &_actionMap;
 
 };
+
+#include "../inline/ActionTarget.inl"
 
 #endif //EASYGAME_ACTIONTARGET_H

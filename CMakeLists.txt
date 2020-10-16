@@ -5,12 +5,19 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(INCLUDE_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/include)
 set(SRC_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/src)
+set(INLINE_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/inline)
+
+#set(INLINE_SRC
+#        ${INLINE_ROOT}/ActionMap.inl
+#        ${INLINE_ROOT}/ActionTarget.inl
+#        )
 
 set(FILES_SRC
         ${SRC_ROOT}/Game.cpp
         ${SRC_ROOT}/Player.cpp
         ${SRC_ROOT}/Action.cpp
-        ${SRC_ROOT}/ActionTarget.cpp
+        ${INLINE_ROOT}/ActionMap.inl
+        ${INLINE_ROOT}/ActionTarget.inl
         ${SRC_ROOT}/main.cpp
         )
 

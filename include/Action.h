@@ -6,6 +6,7 @@
 #define EASYGAME_ACTION_H
 
 #include <SFML/Graphics.hpp>
+#include "./ActionTarget.h"
 
 class Action {
 public:
@@ -32,7 +33,7 @@ public:
 
 private:
 
-    friend class ActionTarget;
+    friend class ActionTarget<int>;
 
     sf::Event _event;
     int _type;

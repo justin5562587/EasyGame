@@ -3,11 +3,13 @@
 //
 #include "../include/ActionTarget.h"
 
-ActionTarget::ActionTarget() {
+template<typename T>
+ActionTarget<T>::ActionTarget(const ActionMap<T> &map) {
 
 }
 
-bool ActionTarget::processEvent(const sf::Event &event) const {
+template<typename T>
+bool ActionTarget<T>::processEvent(const sf::Event &event) const {
     bool res = false;
     for (auto &action : _eventsPoll) {
         if (action.first == event) {
@@ -19,7 +21,8 @@ bool ActionTarget::processEvent(const sf::Event &event) const {
     return res;
 }
 
-void ActionTarget::processEvents() const {
+template<typename T>
+void ActionTarget<T>::processEvents() const {
     for (auto &action : _eventsRealTime) {
         if (action.first.test()) {
             action.second(action.first._event);
@@ -27,7 +30,8 @@ void ActionTarget::processEvents() const {
     }
 }
 
-void ActionTarget::bind(const Action &action, const FuncType &callback) {
+template<typename T>
+void ActionTarget<T>::bind(const Action &action, const FuncType &callback) {
     if (action._type & Action::Type::RealTime) {
         _eventsRealTime.emplace_back(action, callback);
     } else {
@@ -35,7 +39,8 @@ void ActionTarget::bind(const Action &action, const FuncType &callback) {
     }
 }
 
-void ActionTarget::unbind(const Action &action) {
+template<typename T>
+void ActionTarget<T>::unbind(const Action &action) {
     auto remove_func = [&action](const std::pair<Action, FuncType> &pair) -> bool {
         return pair.first == action;
     };

@@ -5,8 +5,8 @@
 #ifndef EASYGAME_ACTIONMAP_H
 #define EASYGAME_ACTIONMAP_H
 
+#include "./Action.h"
 #include <unordered_map>
-#include "../include/Action.h"
 
 template<typename T = int>
 class ActionMap {
@@ -26,5 +26,7 @@ private:
 
     std::unordered_map<T, Action> _map;
 };
+
+#include "../inline/ActionMap.inl"
 
 #endif //EASYGAME_ACTIONMAP_H

@@ -9,7 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-class Player : public sf::Drawable, public ActionTarget {
+class Player : public sf::Drawable, public ActionTarget<int> {
 
 public:
 
@@ -28,14 +28,24 @@ public:
 
     void update(sf::Time deltaTime);
 
+    enum PlayerInputs {
+        Up, Left, Right
+    };
+
+    static void setDefaultInputs();
+
 private:
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
     sf::RectangleShape _shape;
+
     sf::Vector2f _velocity;
 
     bool _isMoving;
+
     int _rotation;
+
+    static ActionMap<int> _playeInputs;;
 
 };
 
