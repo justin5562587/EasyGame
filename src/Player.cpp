@@ -1,47 +1,58 @@
-//
-// Created by justin on 2020/10/14.
-//
-#include "../include/Player.h"
-#include <cmath>
+#include "../include/Player.hpp"
+#include <cmath> //sin, cos
 
-Player::Player() : _shape(sf::Vector2f(32, 32)), _isMoving(false), _rotation(0) {
-    _shape.setFillColor(sf::Color::Blue);
-    _shape.setOrigin(16, 16);
+#include "../include/Configuration.hpp" //Configuration
 
-    bind(Action(sf::Keyboard::Up), [this](const sf::Event &) {
-        _isMoving = true;
-    });
+namespace book
+{
+    Player::Player() : ActionTarget(Configuration::playerInputs)
+                       ,_is_moving(false)
+                       ,_rotation(0)
+    {
+        _ship.setTexture(Configuration::textures.get(Configuration::Textures::Player));
+        _ship.setOrigin(49.5,37.5);
 
-    bind(Action(sf::Keyboard::Left), [this](const sf::Event &) {
-        _rotation -= 1;
-    });
-    bind(Action(sf::Keyboard::Right), [this](const sf::Event &) {
-        _rotation += 1;
-    });
-}
+        bind(Configuration::PlayerInputs::Up,[this](const sf::Event&){
+             _is_moving = true;
+        });
 
-void Player::update(sf::Time deltaTime) {
-    float seconds = deltaTime.asSeconds();
-    if (_rotation != 0) {
-//        float angle = (rotation > 0 ? 1 : -1) * 180 * seconds;
-        float angle = _rotation * 180 * seconds;
-        _shape.rotate(angle);
+        bind(Configuration::PlayerInputs::Left,[this](const sf::Event&){
+             _rotation-= 1;
+         });
+
+        bind(Configuration::PlayerInputs::Right,[this](const sf::Event&){
+             _rotation+= 1;
+         });
     }
-    if (_isMoving) {
-        float angle = _shape.getRotation() / 180 * M_PI - M_PI / 2;
-        _velocity += sf::Vector2f(std::cos(angle), std::sin(angle)) * 60.f * seconds;
+    
+    void Player::processEvents()
+    {
+        _is_moving = false;
+        _rotation = 0;
+        ActionTarget::processEvents();
     }
-    _shape.move(_velocity * seconds);
+
+    void Player::update(sf::Time deltaTime)
+    {
+        float seconds = deltaTime.asSeconds();
+
+        if(_rotation != 0)
+        {
+            float angle = _rotation*180*seconds;
+            _ship.rotate(angle);
+        }
+        
+        if(_is_moving)
+        { 
+            float angle = _ship.getRotation() / 180 * M_PI - M_PI / 2;
+            _velocity += sf::Vector2f(std::cos(angle),std::sin(angle)) * 60.f * seconds;
+        }
+
+        _ship.move(seconds * _velocity);
+    }
+
+   void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
+   {
+       target.draw(_ship,states);
+   }
 }
-
-void Player::processEvents() {
-    _isMoving = false;
-    _rotation = 0;
-    ActionTarget::processEvents();
-}
-
-void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-    target.draw(_shape, states);
-}
-
-
