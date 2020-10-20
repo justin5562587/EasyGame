@@ -45,7 +45,6 @@ namespace book
             std::unordered_map<IDENTIFIER,std::unique_ptr<sf::Music>> _map;
     };
 
-
 }
 #include "./ResourceManager.tpl"
 
