@@ -48,9 +48,18 @@ set(FILES_SRC
         )
 
 set(SFML_DIR "/Users/justin/cpp/SFML_BUILD")
+set(BOX2D_DIR "/Users/justin/cpp/box2d/build/src")
 
 find_package(SFML REQUIRED COMPONENTS graphics window system)
 
+#list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+#find_package(BOX2D REQUIRED)
+#if(BOX2D_FOUND)
+#    include_directories(${BOX2D_INCLUDE_DIR})
+#    target_link_libraries(${EXECUTABLE_NAME} ${BOX2D_LIBRARY})
+#endif()
+
 add_executable(EasyGame ${FILES_HEADER} ${FILES_SRC})
 
-target_link_libraries(EasyGame sfml-graphics sfml-window sfml-system)
+#target_link_libraries(EasyGame sfml-graphics sfml-window sfml-system box2d)
+target_link_libraries(EasyGame sfml-graphics sfml-window sfml-system sfml-audio)

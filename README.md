@@ -13,3 +13,5 @@ followed by SFML Blurprints
 [SFML Offical website](https://www.sfml-dev.org/index.php)
 
 [Significance of a .inl file in C++](https://stackoverflow.com/questions/1208028/significance-of-a-inl-file-in-c)
+
+[find_package与CMake如何查找链接库详解](https://blog.csdn.net/bytxl/article/details/50637277)
